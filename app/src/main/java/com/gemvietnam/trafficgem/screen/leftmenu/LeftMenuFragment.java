@@ -8,41 +8,34 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.gemvietnam.base.viper.ViewFragment;
 import com.gemvietnam.trafficgem.R;
+
 import java.util.HashMap;
 import java.util.Map;
-import butterknife.Bind;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
+
 
 /**
  * The LeftMenu Fragment
  */
 public class LeftMenuFragment extends ViewFragment<LeftMenuContract.Presenter> implements LeftMenuContract.View {
 
-  @Bind(R.id.menu_profile_img)
   CircleImageView mProfileImg;
-  @Bind(R.id.profile_name_tv)
   TextView mNameTv;
-  @Bind(R.id.profile_email_tv)
   TextView mEmailTv;
-  @Bind(R.id.menu_your_location_tv)
   TextView mYourLocationTv;
-  @Bind(R.id.menu_direction_tv)
   TextView mDirectionTv;
-  @Bind(R.id.menu_minus_img)
   ImageView mMinusImg;
-  @Bind(R.id.menu_plus_img)
   ImageView mPlusImg;
-  @Bind(R.id.menu_normal_search_tv)
   TextView mNormalSearchTv;
-  @Bind(R.id.menu_advance_search_tv)
   TextView mAdvanceSearchTv;
-  @Bind(R.id.menu_traffic_state_tv)
   TextView mTrafficStateTv;
-  @Bind(R.id.menu_signout_tv)
   TextView mSignoutTv;
-  @Bind(R.id.menu_expand_ll)
   LinearLayout mExpandLl;
 
   private final Map<TextView, MenuItem> mNavigationItemMap = new HashMap<>();
@@ -51,6 +44,21 @@ public class LeftMenuFragment extends ViewFragment<LeftMenuContract.Presenter> i
     return new LeftMenuFragment();
   }
 
+  private void bindView(View view){
+    mProfileImg = (CircleImageView) view.findViewById(R.id.menu_profile_img);
+    mNameTv = (TextView) view.findViewById(R.id.profile_name_tv);
+    mEmailTv = (TextView) view.findViewById(R.id.profile_email_tv);
+    mYourLocationTv = (TextView) view.findViewById(R.id.menu_your_location_tv);
+    mDirectionTv = (TextView) view.findViewById(R.id.menu_direction_tv);
+    mMinusImg = (ImageView) view.findViewById(R.id.menu_minus_img);
+    mPlusImg = (ImageView) view.findViewById(R.id.menu_plus_img);
+    mNormalSearchTv = (TextView) view.findViewById(R.id.menu_normal_search_tv);
+    mAdvanceSearchTv = (TextView) view.findViewById(R.id.menu_advance_search_tv);
+    mTrafficStateTv = (TextView) view.findViewById(R.id.menu_traffic_state_tv);
+    mSignoutTv = (TextView) view.findViewById(R.id.menu_signout_tv);
+    mExpandLl = (LinearLayout) view.findViewById(R.id.menu_expand_ll);
+
+  }
   @Override
   protected int getLayoutId() {
     return R.layout.fragment_left_menu;
@@ -60,6 +68,9 @@ public class LeftMenuFragment extends ViewFragment<LeftMenuContract.Presenter> i
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     View view = super.onCreateView(inflater, container, savedInstanceState);
+    //ButterKnife.bind(this, view);
+
+    bindView(view);
 
     mMinusImg.setVisibility(View.VISIBLE);
     mPlusImg.setVisibility(View.GONE);

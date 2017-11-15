@@ -19,7 +19,7 @@ import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 /**
  * Created by Quannv on 3/29/2017.
@@ -28,9 +28,9 @@ import butterknife.Bind;
 public class MainActivity extends ContainerActivity implements
     OnMenuItemClickedListener, DrawerLayout.DrawerListener, DrawerToggleListener {
 
-  @Bind(R.id.drawer_layout)
+  @BindView(R.id.drawer_layout)
   DrawerLayout mDrawerLayout;
-  @Bind(R.id.left_drawer)
+  @BindView(R.id.left_drawer)
   FrameLayout mLeftDrawer;
   MenuItem current;
   private MainNavigator mMainNavigator;
@@ -47,7 +47,7 @@ public class MainActivity extends ContainerActivity implements
   public void initLayout() {
 //    super.initLayout();
 
-    mDrawerLayout.addDrawerListener(this);
+   // mDrawerLayout.addDrawerListener(this);
 
     // Add menu
     getSupportFragmentManager().beginTransaction()

@@ -15,10 +15,13 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.CardView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -62,7 +65,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.OnClick;
 
 import static android.app.Activity.RESULT_CANCELED;
@@ -76,15 +79,10 @@ public class MapFragment extends ViewFragment<MapContract.Presenter> implements 
     OnMapReadyCallback, GoogleApiClient.OnConnectionFailedListener,
     GoogleApiClient.ConnectionCallbacks, OnMenuItemClickedListener {
 
-  @Bind(R.id.activity_main_location_search_tv)
-  TextView mLocationSearchTv;
-  @Bind(R.id.activity_main_location_cancel_img)
-  ImageView mSearchCancelImg;
-  @Bind(R.id.activity_main_location_search_cv)
-  CardView mLocationSearchCv;
-  @Bind(R.id.activity_main_gridview)
-  GridView mGridview;
-
+  private TextView mLocationSearchTv;
+  private ImageView mSearchCancelImg;
+  private CardView mLocationSearchCv;
+  private GridView mGridview;
   private GoogleMap mMap;
   private ProgressDialog mprogress;
   private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1;
@@ -101,6 +99,12 @@ public class MapFragment extends ViewFragment<MapContract.Presenter> implements 
   private double delLat = 0.0089573;
   private double delLon = 0.0088355;
 
+  public void bindView(View view){
+    mLocationSearchTv = (TextView) view.findViewById(R.id.activity_main_location_search_tv);
+    mSearchCancelImg = (ImageView) view.findViewById(R.id.activity_main_location_cancel_img);
+    mLocationSearchCv = (CardView) view.findViewById(R.id.activity_main_location_search_cv);
+    mGridview = (GridView) view.findViewById(R.id.activity_main_gridview);
+  }
   public static MapFragment getInstance() {
     return new MapFragment();
   }
@@ -117,12 +121,21 @@ public class MapFragment extends ViewFragment<MapContract.Presenter> implements 
     if (Build.VERSION.SDK_INT >= 23) {
       checkPermissions();
     }
+
+  }
+
+  @Nullable
+  @Override
+  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    View view  = super.onCreateView(inflater, container, savedInstanceState);
+    bindView(view);
     mLocationSearchCv.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
         openAutoCompleteActivity();
       }
     });
+    return view;
   }
 
   private void signout() {

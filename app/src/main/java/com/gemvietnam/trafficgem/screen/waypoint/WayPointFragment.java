@@ -54,7 +54,7 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
@@ -68,11 +68,11 @@ public class WayPointFragment extends ViewFragment<WayPointContract.Presenter> i
     GoogleApiClient.OnConnectionFailedListener,
     GoogleApiClient.ConnectionCallbacks {
 
-  @Bind(R.id.waypoint_search_img)
+  @BindView(R.id.waypoint_search_img)
   ImageView mSearchImg;
-  @Bind(R.id.waypoint_location_tv)
+  @BindView(R.id.waypoint_location_tv)
   TextView mLocationTv;
-  @Bind(R.id.waypoint_destination_tv)
+  @BindView(R.id.waypoint_destination_tv)
   TextView mDestinationTv;
 
   private static final String YOUR_LOCATION = "Your Location";
